@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Mascota</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+        input:focus, select:focus {
+            border: 1px solid #5cb85c;
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registrar Mascota</h2>
+        <form action="registro_mascota.php" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="raza">Raza:</label>
+            <input type="text" id="raza" name="raza" required>
+            <small style="color: gray;">Si no conoce la raza, escriba 'Desconozco'</small>
+
+            
+            <select id="especie" name="especie" required>
+                <option value="">Seleccione la especie</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                </select>
+
+            <label for="tamano">Tamaño:</label>
+            <select id="tamano" name="tamano" required>
+                <option value="">Seleccione el tamaño</option>
+                <option value="Pequeño">Pequeño</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+            </select>
+
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="">Seleccione el estado</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Adoptado">Adoptado</option>
+            </select>
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="">Seleccione el género</option>
+                <option value="Macho">Macho</option>
+                <option value="hembra">hembra</option>
+            </select>
+
+
+            <input type="submit" value="Registrar">
+            <a class="nav-button" href="subirfoto.php">Subir Foto</a>
+        </form>
+        <?php if (isset($error) && $error): ?>
+            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

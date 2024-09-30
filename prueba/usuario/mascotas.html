@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+        }
+        header {
+            background-color: #87ceeb; /* Celeste más oscuro */
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative; /* Para el logo */
+            border-bottom: 4px solid gray; /* Borde gris en la parte superior */
+        }
+        .header-logo {
+            height: 70px; /* Altura del logo */
+            border-radius: 50%; /* Circular */
+            object-fit: cover; /* Ajuste de imagen */
+            position: absolute; /* Posiciona el logo de forma absoluta respecto a su contenedor relativo más cercano */
+            top: 10px; /* Distancia desde el top del header */
+            left: 20px; /* Distancia desde el lado izquierdo del header */
+        }
+        nav {
+            margin: 10px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px; /* Espaciado interno para los enlaces */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco semi-transparente al pasar el mouse */
+        }
+        main {
+            padding: 20px;
+            flex: 1; /* Permite que el main ocupe el espacio disponible */
+            text-align: center;
+        }
+        .catalog-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .pet {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            width: 200px; /* Ancho de cada tarjeta de mascota */
+        }
+        .pet img {
+            width: 100%; /* Imagen se ajusta al ancho de la tarjeta */
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #9370db; /* Violeta */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 4px solid gray; /* Borde gris en la parte inferior */
+            width: 100%;
+        }
+        .add-pet-button {
+            background-color: #28a745; /* Verde */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Espacio debajo del botón */
+            transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+        }
+        .add-pet-button:hover {
+            background-color: #218838; /* Verde más oscuro al pasar el mouse */
+        }
+        /* Estilo del modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="Logo.png" alt="Logo" class="header-logo">
+    <h1>Bienvenido a Adopt-me</h1>
+    <nav>
+        <a href="principal.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="mascotas.html"><i class="fas fa-paw"></i> Mascotas</a>
+        <a href="catalogo.php"><i class="fas fa-shopping-cart"></i> Tienda</a>
+        <a href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
+    </nav>
+</header>
+
+<main>
+    <button class="add-pet-button" onclick="location.href='registro_mascota.html'">
+        <i class="fas fa-plus"></i> Añadir Mascota
+    </button>
+    <div class="catalog-container">
+        <!-- Tarjeta de mascota 1 -->
+        <div class="pet" onclick="openModal('Bella', 'Bella es una perra de 3 años, muy amigable y juguetona. Le encanta correr en el parque y jugar con sus juguetes.', 'Perra', '3 años', 'Labrador', 'Bella es una mascota ideal para familias.')">
+            <img src="perra.jpg" alt="Bella">
+            <h3>Bella</h3>
+            <p>Perra, 3 años</p>
+        </div>
+
+        <!-- Tarjeta de mascota 2 -->
+        <div class="pet" onclick="openModal('Max', 'Max es un gato de 2 años que ama dormir y jugar con sus dueños. Es muy cariñoso y le encanta ser el centro de atención.', 'Gato', '2 años', 'Persa', 'Max es perfecto para quienes buscan compañía.')">
+            <img src="gato.jpg" alt="Max">
+            <h3>Max</h3>
+            <p>Gato, 2 años</p>
+        </div>
+
+        <!-- Tarjeta de mascota 3 -->
+        <div class="pet" onclick="openModal('Luna', 'Luna es una conejita de 1 año, muy activa y curiosa. Le encanta explorar y comer zanahorias.', 'Conejo', '1 año', 'Enano', 'Luna es ideal para quienes buscan una mascota tranquila.')">
+            <img src="conejo.jpg" alt="Luna">
+            <h3>Luna</h3>
+            <p>Conejo, 1 año</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-name"></h2>
+            <p id="modal-description"></p>
+            <p><strong>Especie:</strong> <span id="modal-species"></span></p>
+            <p><strong>Edad:</strong> <span id="modal-age"></span></p>
+            <p><strong>Raza:</strong> <span id="modal-breed"></span></p>
+            <p><strong>Notas:</strong> <span id="modal-notes"></span></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Mi Página de Mascotas</p>
+</footer>
+
+<script>
+function openModal(name, description, species, age, breed, notes) {
+    document.getElementById("modal-name").innerText = name;
+    document.getElementById("modal-description").innerText = description;
+    document.getElementById("modal-species").innerText = species;
+    document.getElementById("modal-age").innerText = age;
+    document.getElementById("modal-breed").innerText = breed;
+    document.getElementById("modal-notes").innerText = notes;
+    document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+// Cerrar el modal si se hace clic fuera de él
+window.onclick = function(event) {
+    var modal = document.getElementById("myModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
