@@ -137,7 +137,7 @@ $fotoPerfil = isset($usuario['foto']) ? $usuario['foto'] : 'default.jpg'; // Cam
 </main>
 
 <footer>
-    <p>&copy; 2024 Mi Página de Adopcion de Mascotas</p>
+    <p>&copy; 2024 Mi Página de Adopcion</p>
 </footer>
 
 </body>
